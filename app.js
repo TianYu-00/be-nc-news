@@ -67,4 +67,7 @@ add tests for GET /api/articles/:article_id
 update app.js - get article by id,  error handling
 add controller & model
 update endpoints.json
+
+// Refactor TASK 3
+update test to require in endpoints instead of fs.readfile
 */

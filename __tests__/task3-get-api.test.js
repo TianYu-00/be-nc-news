@@ -1,5 +1,6 @@
 const { app, request, db, seed, data } = require("../testIndex");
 const fs = require("fs/promises");
+const endpointsData = require("../endpoints.json");
 
 afterAll(() => {
   return db.end();
@@ -24,22 +25,21 @@ describe("GET /api", () => {
   });
 
   test("should return the correct endpoints length", async () => {
-    const endpointData = await fs.readFile("endpoints.json", "utf-8");
     return request(app)
       .get("/api")
       .then(({ text }) => {
-        const expectedEndPointData = JSON.parse(endpointData);
+        const expectedEndPointData = endpointsData;
         const resultEndPointData = JSON.parse(text);
         expect(Object.keys(resultEndPointData).length).toBe(Object.keys(expectedEndPointData).length);
       });
   });
 
   test("should return the accurate endpoint JSON object", async () => {
-    const endpointData = await fs.readFile("endpoints.json", "utf-8");
     return request(app)
       .get("/api")
       .then(({ text }) => {
-        expect(text).toBe(endpointData);
+        const parsedText = JSON.parse(text);
+        expect(parsedText).toEqual(endpointsData);
       });
   });
 });
