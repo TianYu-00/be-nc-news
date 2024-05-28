@@ -11,12 +11,10 @@ app.get("/api/topics", controller_topics.getTopics);
 ////////////////////////////////////////////
 // ERROR HANDLING
 app.all("*", (request, response) => {
-  // Wild card route error
   response.status(404).send({ msg: "ROUTE NOT FOUND" });
 });
 
 app.use((error, request, response, next) => {
-  // Custom error
   response.status(error.status).send({ msg: error.msg });
   next();
 });

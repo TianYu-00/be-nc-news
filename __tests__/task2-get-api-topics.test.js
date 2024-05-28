@@ -1,5 +1,4 @@
 const { app, request, db, seed, data } = require("../testIndex");
-const fs = require("fs/promises");
 
 afterAll(() => {
   return db.end();
