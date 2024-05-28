@@ -43,4 +43,10 @@ add controller & model
 add test index to link all tests requires to 1 file, keep the code DRY.
 update endpoints.json
 update to task2 test - changed body.msg to "ROUTE NOT FOUND"
+
+// Refactor TASK2:
+add new test to check length of body with expected length
+update require to use test index
+update model to send the rows directly
+update controller naming convention result -> topics
 */
