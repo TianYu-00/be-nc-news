@@ -63,5 +63,6 @@ npm test test_file_name
 # "test": "jest"
 ```
 
+---
 > [!NOTE]
 Please check `package.json` file to see the list of dependencies being used, and install it accordingly if any is missing.
