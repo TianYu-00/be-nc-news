@@ -18,7 +18,7 @@ describe("GET api/topics", () => {
       .get("/api/bad-route")
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toBe("NOT FOUND");
+        expect(body.msg).toBe("ROUTE NOT FOUND");
       });
   });
 
