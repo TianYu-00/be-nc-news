@@ -1,8 +1,5 @@
-const app = require("../app");
-const request = require("supertest"); // https://www.npmjs.com/package/supertest
-const db = require("../db/connection");
-const seed = require("../db/seeds/seed");
-const data = require("../db/data/test-data/index"); // test database
+const { app, request, db, seed, data } = require("../testIndex");
+const fs = require("fs/promises");
 
 afterAll(() => {
   return db.end();
@@ -26,10 +23,18 @@ describe("GET api/topics", () => {
     return request(app).get("/api/topics").expect(200);
   });
 
+  test("should return the correct length of topics in body", async () => {
+    const expectedLength = (await db.query(`SELECT * from topics`)).rows.length;
+    return request(app)
+      .get("/api/topics")
+      .then(({ body }) => {
+        expect(body.length).toBe(expectedLength);
+      });
+  });
+
   test("should return a list of topics, each containing a description and a slug", () => {
     return request(app)
       .get("/api/topics")
-      .expect(200)
       .then(({ body }) => {
         body.forEach((currentObj) => {
           expect(currentObj).toMatchObject({
