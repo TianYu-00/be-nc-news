@@ -3,6 +3,7 @@ const controller_topics = require("./mvc/controllers/topics.controller");
 const controller_apis = require("./mvc/controllers/api.controller");
 const controller_articles = require("./mvc/controllers/article.controller");
 const app = express();
+app.use(express.json());
 ////////////////////////////////////////////
 // GET
 app.get("/api", controller_apis.getApis);
@@ -12,9 +13,15 @@ app.get("/api/articles/:article_id", controller_articles.getArticleById);
 app.get("/api/articles/:article_id/comments", controller_articles.getArticleComments);
 ///////////////////////////////////////////
 
+///////////////////////////////////////////
+// POST
+app.post("/api/articles/:article_id/comments", controller_articles.postArticleComment);
+///////////////////////////////////////////
+
 ////////////////////////////////////////////
 // ERROR HANDLING
 app.use((error, request, response, next) => {
+  // console.log("Custom Message");
   if (error.msg) {
     response.status(error.status).send({ msg: error.msg });
   } else {
@@ -24,18 +31,23 @@ app.use((error, request, response, next) => {
 
 app.use((error, request, response, next) => {
   // PSQL Error
+  // console.log("PSQL Error");
   if (error.code === "22P02") {
     response.status(400).send({ msg: "BAD REQUEST" });
+  } else if (error.code === "23503") {
+    response.status(404).send({ msg: "NOT FOUND" });
   } else {
     next(error);
   }
 });
 
 app.all("*", (request, response) => {
+  // console.log("Wild card 404 Route Not Found");
   response.status(404).send({ msg: "ROUTE NOT FOUND" });
 });
 
 app.use((error, request, response, next) => {
+  // console.log("500 Internal Server Error");
   response.status(500).send({ msg: "INTERNAL SERVER ERROR" });
 });
 ///////////////////////////////////////////
@@ -92,4 +104,12 @@ update tasks.md
 add tests to make sure the returning objects do not contain the key-value pair of body
 update article controller naming convention from result -> articles
 remove 404 tests for this task
+
+// TASK 7:
+add tests for POST /api/articles/:article_id/comments
+update app.js
+add controller & model
+update endpoints.json
+update package.json
+
 */

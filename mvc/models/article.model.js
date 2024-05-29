@@ -24,11 +24,24 @@ exports.selectArticleComments = (articleId) => {
   return errorHandleDBQuery(query, [articleId], errorMsg).then((rows) => rows);
 };
 
+exports.insertCommentByArticleId = async (articleId, commentData) => {
+  if (!commentData.username || !commentData.body) {
+    return Promise.reject({ status: 400, msg: "BAD REQUEST" });
+  }
+
+  const query = `INSERT INTO comments (body, article_id, author)
+  VALUES ($1, $2, $3) RETURNING *;`;
+  const errorMsg = "NOT FOUND";
+  return errorHandleDBQuery(query, [commentData.body, articleId, commentData.username], errorMsg).then((rows) => {
+    return rows[0];
+  });
+};
+
 /////////////////////////////////////////////////////////////////////////////////
 // Error handle DB reusable functions
 ////////////////////////////////////////////////////////////////////////////////
-const errorHandleDBQuery = (query, articleId, msg) => {
-  return db.query(query, articleId).then((result) => {
+const errorHandleDBQuery = (query, queryParams, msg) => {
+  return db.query(query, queryParams).then((result) => {
     if (result.rows.length === 0) {
       return Promise.reject({ status: 404, msg: msg });
     }
