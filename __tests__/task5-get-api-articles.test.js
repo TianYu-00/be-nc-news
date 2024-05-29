@@ -10,15 +10,6 @@ beforeEach(() => {
 });
 
 describe("GET /api/articles", () => {
-  test("should return 404, with message indicating the route is not found", () => {
-    return request(app)
-      .get("/api/bad-route")
-      .expect(404)
-      .then(({ body }) => {
-        expect(body.msg).toBe("ROUTE NOT FOUND");
-      });
-  });
-
   test("should return a 200 status code, indicating the endpoint is accessible", () => {
     return request(app).get("/api/articles").expect(200);
   });
@@ -64,6 +55,16 @@ describe("GET /api/articles", () => {
       .get("/api/articles")
       .then(({ body }) => {
         expect(body).toBeSortedBy("created_at", { descending: true });
+      });
+  });
+
+  test("should not return the body key-value pair", () => {
+    return request(app)
+      .get("/api/articles")
+      .then(({ body }) => {
+        body.forEach((currentObj) => {
+          expect(currentObj).toEqual(expect.not.objectContaining({ body: expect.any(String) }));
+        });
       });
   });
 });
