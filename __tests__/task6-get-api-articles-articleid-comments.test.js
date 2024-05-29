@@ -10,10 +10,6 @@ beforeEach(() => {
 });
 
 describe("GET /api/articles/:article_id/comments", () => {
-  test("should return a 200 status code, indicating the endpoint is accessible", () => {
-    return request(app).get("/api/articles/1/comments").expect(200);
-  });
-
   test("should return back as an array", () => {
     return request(app)
       .get("/api/articles/1/comments")
@@ -22,9 +18,19 @@ describe("GET /api/articles/:article_id/comments", () => {
       });
   });
 
+  test("should return an error message when article does not have any comments", () => {
+    return request(app)
+      .get("/api/articles/2/comments")
+      .expect(404)
+      .then((response) => {
+        expect(response.body.msg).toBe("NOT FOUND");
+      });
+  });
+
   test("should return the correct key and data type for value", () => {
     return request(app)
       .get("/api/articles/1/comments")
+      .expect(200)
       .then(({ body }) => {
         body.forEach((currentObj) => {
           currentObj.created_at = new Date(currentObj.created_at);
