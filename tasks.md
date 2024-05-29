@@ -1,16 +1,16 @@
-`GET /api/topics`
+`GET /api/topics` ✅
 - responds with a list of topics
 
-`GET /api`
+`GET /api` ✅
 - responds with a list of available endpoints
 
-`GET /api/articles/:article_id`
+`GET /api/articles/:article_id` ✅
 - responds with a single article by article_id
 
-`GET /api/articles`
+`GET /api/articles` ✅
 - responds with a list of articles
 
-`GET /api/articles/:article_id/comments`
+`GET /api/articles/:article_id/comments` ✅
 - responds with a list of comments by article_id
 
 `POST /api/articles/:article_id/comments`

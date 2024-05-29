@@ -9,6 +9,7 @@ app.get("/api", controller_apis.getApis);
 app.get("/api/topics", controller_topics.getTopics);
 app.get("/api/articles", controller_articles.getArticles);
 app.get("/api/articles/:article_id", controller_articles.getArticleById);
+app.get("/api/articles/:article_id/comments", controller_articles.getArticleComments);
 ///////////////////////////////////////////
 
 ////////////////////////////////////////////
@@ -78,4 +79,12 @@ update app.js - get articles
 add controller & model
 add jest-sorted for tests
 update package.json
+
+// TASK 6:
+add tests for GET /api/articles/:article_id/comments
+update app.js
+add controller & model
+add jest-sorted for tests
+update endpoints.json
+update tasks.md
 */
