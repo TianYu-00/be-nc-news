@@ -7,6 +7,7 @@ const app = express();
 // GET
 app.get("/api", controller_apis.getApis);
 app.get("/api/topics", controller_topics.getTopics);
+app.get("/api/articles", controller_articles.getArticles);
 app.get("/api/articles/:article_id", controller_articles.getArticleById);
 ///////////////////////////////////////////
 
@@ -70,4 +71,11 @@ update endpoints.json
 
 // Refactor TASK 3
 update test to require in endpoints instead of fs.readfile
+
+// TASK 5:
+add tests for GET /api/articles
+update app.js - get articles
+add controller & model
+add jest-sorted for tests
+update package.json
 */
