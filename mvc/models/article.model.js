@@ -16,6 +16,14 @@ exports.selectArticles = () => {
   return errorHandleDBQuery(query, null, errorMsg).then((rows) => rows);
 };
 
+exports.selectArticleComments = (articleId) => {
+  const query = `SELECT comment_id, votes, created_at, author, body, article_id FROM comments 
+  WHERE article_id = $1
+  ORDER BY created_at DESC;`;
+  const errorMsg = "NOT FOUND";
+  return errorHandleDBQuery(query, [articleId], errorMsg).then((rows) => rows);
+};
+
 /////////////////////////////////////////////////////////////////////////////////
 // Error handle DB reusable functions
 ////////////////////////////////////////////////////////////////////////////////
