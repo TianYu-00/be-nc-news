@@ -114,5 +114,6 @@ update package.json
 
 // Refactor Task 6:
 add test error handle to check for no comment articles
+removed status code 200 test and moved it below using .expect(200)
 
 */
