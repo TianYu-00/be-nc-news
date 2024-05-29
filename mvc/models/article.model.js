@@ -9,8 +9,8 @@ exports.selectArticleById = (articleId) => {
 /////////////////////////////////////////////////////////////////////////////////
 // Error handle DB reusable functions
 ////////////////////////////////////////////////////////////////////////////////
-const errorHandleDBQuery = (query, teamId, msg) => {
-  return db.query(query, teamId).then((result) => {
+const errorHandleDBQuery = (query, articleId, msg) => {
+  return db.query(query, articleId).then((result) => {
     if (result.rows.length === 0) {
       return Promise.reject({ status: 404, msg: msg });
     }
