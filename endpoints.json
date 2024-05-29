@@ -70,5 +70,11 @@
         "article_id": 1
       }
     ]
+  },
+  "POST /api/articles/:article_id/comments": {
+    "description": "post a comment to given article id",
+    "queries": [],
+    "format": "Object",
+    "exampleResponse": { "comment": "Hello World!" }
   }
 }
