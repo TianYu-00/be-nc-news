@@ -87,4 +87,9 @@ add controller & model
 add jest-sorted for tests
 update endpoints.json
 update tasks.md
+
+// Refactor Task 5
+add tests to make sure the returning objects do not contain the key-value pair of body
+update article controller naming convention from result -> articles
+remove 404 tests for this task
 */
