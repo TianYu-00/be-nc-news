@@ -24,7 +24,7 @@ exports.selectArticleComments = (articleId) => {
   return errorHandleDBQuery(query, [articleId], errorMsg).then((rows) => rows);
 };
 
-exports.insertCommentByArticleId = async (articleId, commentData) => {
+exports.insertCommentByArticleId = (articleId, commentData) => {
   if (!commentData.username || !commentData.body) {
     return Promise.reject({ status: 400, msg: "BAD REQUEST" });
   }
@@ -35,6 +35,22 @@ exports.insertCommentByArticleId = async (articleId, commentData) => {
   return errorHandleDBQuery(query, [commentData.body, articleId, commentData.username], errorMsg).then((rows) => {
     return rows[0];
   });
+};
+
+exports.updateArticleById = async (articleId, body) => {
+  // console.log((await db.query(`SELECT * FROM articles`)).rows);
+  const article = await db.query(`SELECT votes FROM articles WHERE article_id = $1`, [articleId]);
+
+  const query = `UPDATE articles
+    SET votes = $1
+    WHERE article_id = $2 RETURNING *;`;
+  const errorMsg = "article does not exist";
+
+  if (article.rows.length === 0) {
+    return Promise.reject({ status: 404, msg: errorMsg });
+  }
+  const newVoteValue = article.rows[0].votes + body.inc_votes;
+  return errorHandleDBQuery(query, [newVoteValue, articleId], errorMsg).then((rows) => rows[0]);
 };
 
 /////////////////////////////////////////////////////////////////////////////////
