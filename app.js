@@ -2,6 +2,7 @@ const express = require("express"); // https://www.npmjs.com/package/express
 const controller_topics = require("./mvc/controllers/topics.controller");
 const controller_apis = require("./mvc/controllers/api.controller");
 const controller_articles = require("./mvc/controllers/article.controller");
+const controller_comments = require("./mvc/controllers/comments.controller");
 const app = express();
 app.use(express.json());
 ////////////////////////////////////////////
@@ -21,6 +22,11 @@ app.post("/api/articles/:article_id/comments", controller_articles.postArticleCo
 ///////////////////////////////////////////
 // PATCH
 app.patch("/api/articles/:article_id", controller_articles.patchArticleById);
+///////////////////////////////////////////
+
+///////////////////////////////////////////
+// DELETE
+app.delete("/api/comments/:comment_id", controller_comments.deleteCommentById);
 ///////////////////////////////////////////
 
 ////////////////////////////////////////////
@@ -126,5 +132,12 @@ removed status code 200 test and moved it below using .expect(200)
 add tests for PATCH /api/articles/:article_id
 update app.js
 add controller & model
+update endpoints.json
+
+// TASK 9:
+add tests for DELETE /api/comments/:comment_id
+update app.js
+add controller & model
+update package.json
 update endpoints.json
 */
