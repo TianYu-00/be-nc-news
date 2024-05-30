@@ -6,14 +6,34 @@ exports.selectArticleById = (articleId) => {
   return errorHandleDBQuery(query, [articleId], errorMsg).then((rows) => rows[0]);
 };
 
-exports.selectArticles = () => {
-  const query = `SELECT articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.article_id) AS comment_count 
-  FROM articles
-  LEFT JOIN comments ON comments.article_id = articles.article_id
-  GROUP BY articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url
-  ORDER BY articles.created_at DESC;`;
-  const errorMsg = "";
-  return errorHandleDBQuery(query, null, errorMsg).then((rows) => rows);
+exports.selectArticles = (query) => {
+  const acceptedQuery = ["topic"];
+  const arrayOfKeyValue = Object.entries(query);
+  if (Object.keys(query).length > 0) {
+    for (const key in query) {
+      if (!acceptedQuery.includes(key)) {
+        return Promise.reject({ status: 400, msg: "BAD REQUEST" });
+      }
+    }
+  }
+
+  let sqlQuery = `SELECT articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.article_id) AS comment_count
+  FROM articles 
+  LEFT JOIN comments ON comments.article_id = articles.article_id `;
+
+  const queryValueArray = [];
+  arrayOfKeyValue.forEach((currentQuery) => {
+    if (currentQuery[0] === "topic") {
+      sqlQuery += `WHERE topic = $1 `;
+      queryValueArray.push(currentQuery[1]);
+    }
+  });
+
+  sqlQuery += `GROUP BY articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url ORDER BY articles.created_at DESC `;
+  sqlQuery += ";";
+
+  const errorMsg = "NOT FOUND";
+  return errorHandleDBQuery(sqlQuery, queryValueArray, errorMsg).then((rows) => rows);
 };
 
 exports.selectArticleComments = (articleId) => {
@@ -38,7 +58,6 @@ exports.insertCommentByArticleId = (articleId, commentData) => {
 };
 
 exports.updateArticleById = async (articleId, body) => {
-  // console.log((await db.query(`SELECT * FROM articles`)).rows);
   const article = await db.query(`SELECT votes FROM articles WHERE article_id = $1`, [articleId]);
 
   const query = `UPDATE articles
