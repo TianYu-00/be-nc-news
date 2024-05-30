@@ -148,4 +148,10 @@ add tests for GET /api/users
 update app.js
 add controller & model
 update endpoints.json
+
+// TASK 11: 
+add tests for GET /api/articles (topic query)
+update app.js
+update article controller & model
+
 */
