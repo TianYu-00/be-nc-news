@@ -13,16 +13,16 @@
 `GET /api/articles/:article_id/comments` ✅
 - responds with a list of comments by article_id
 
-`POST /api/articles/:article_id/comments`
+`POST /api/articles/:article_id/comments` ✅
 - add a comment by article_id
 
-`PATCH /api/articles/:article_id`
+`PATCH /api/articles/:article_id` ✅
 - updates an article by article_id
 
-`DELETE /api/comments/:comment_id`
+`DELETE /api/comments/:comment_id` ✅
 - deletes a comment by comment_id
 
-`GET /api/users`
+`GET /api/users` ✅
 - responds with a list of users
 
 `GET /api/articles (queries)`
