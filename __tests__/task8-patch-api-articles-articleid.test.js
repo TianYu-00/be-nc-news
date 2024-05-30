@@ -13,11 +13,11 @@ describe("PATCH /api/articles/:article_id", () => {
   test("should increment the vote count of the specified article", () => {
     return request(app)
       .patch("/api/articles/1")
-      .send({ inc_votes: 50 })
+      .send({ inc_votes: 100 })
       .expect(200)
       .then((result) => {
         // console.log(result.body);
-        expect(result.body.votes).toBe(150);
+        expect(result.body.votes).toBe(200);
       });
   });
 
