@@ -154,4 +154,9 @@ add tests for GET /api/articles (topic query)
 update app.js
 update article controller & model
 
+// TASK 12:
+add tests for GET /api/articles/:article_id (comment_count)
+update app.js
+update article controller & model
+update endpoints.json
 */

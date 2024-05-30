@@ -1,11 +1,35 @@
 const db = require("../../db/connection");
 
-exports.selectArticleById = (articleId) => {
-  const query = "SELECT * FROM articles WHERE article_id = $1";
-  const errorMsg = "article does not exist";
-  return errorHandleDBQuery(query, [articleId], errorMsg).then((rows) => rows[0]);
-};
+exports.selectArticleById = (articleId, query) => {
+  const acceptedQuery = ["comment_count"];
+  if (Object.keys(query).length > 0) {
+    for (const key in query) {
+      if (!acceptedQuery.includes(key)) {
+        return Promise.reject({ status: 400, msg: "BAD REQUEST" });
+      }
+    }
+  }
 
+  let sqlQuery = "";
+  let hasComment_Count = false;
+  for (const key in query) {
+    if (key === "comment_count") {
+      sqlQuery = `SELECT articles.*, COUNT(comments.comment_id) AS comment_count FROM articles
+      LEFT JOIN comments ON comments.article_id = articles.article_id
+      WHERE articles.article_id = $1
+      GROUP BY articles.article_id;`;
+      hasComment_Count = true;
+    }
+  }
+
+  if (!hasComment_Count) {
+    sqlQuery = `SELECT articles.* FROM articles WHERE article_id = $1;`;
+  }
+
+  const errorMsg = "article does not exist";
+  return errorHandleDBQuery(sqlQuery, [articleId], errorMsg).then((rows) => rows[0]);
+};
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 exports.selectArticles = (query) => {
   const acceptedQuery = ["topic", "author", "sort_by", "order"];
   const arrayOfKeyValue = Object.entries(query);

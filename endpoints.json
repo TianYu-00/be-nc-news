@@ -42,7 +42,7 @@
   },
   "GET /api/articles/:article_id": {
     "description": "get an article by its id",
-    "queries": [],
+    "queries": ["comment_count"],
     "format": "Object",
     "exampleResponse": {
       "article_id": 1,

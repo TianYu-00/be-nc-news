@@ -5,9 +5,11 @@ const {
   insertCommentByArticleId,
   updateArticleById,
 } = require("../models/article.model");
-exports.getArticleById = (request, response, next) => {
+exports.getArticleById = async (request, response, next) => {
   const id = request.params.article_id;
-  selectArticleById(id)
+  const query = request.query;
+
+  selectArticleById(id, query)
     .then((article) => {
       response.status(200).send(article);
     })
@@ -47,7 +49,6 @@ exports.patchArticleById = (request, response, next) => {
   const body = request.body;
   updateArticleById(articleId, body)
     .then((updatedArticle) => {
-      // console.log(updatedArticle);
       response.status(200).send(updatedArticle);
     })
     .catch(next);
