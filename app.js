@@ -18,6 +18,11 @@ app.get("/api/articles/:article_id/comments", controller_articles.getArticleComm
 app.post("/api/articles/:article_id/comments", controller_articles.postArticleComment);
 ///////////////////////////////////////////
 
+///////////////////////////////////////////
+// PATCH
+app.patch("/api/articles/:article_id", controller_articles.patchArticleById);
+///////////////////////////////////////////
+
 ////////////////////////////////////////////
 // ERROR HANDLING
 app.use((error, request, response, next) => {
@@ -48,6 +53,7 @@ app.all("*", (request, response) => {
 
 app.use((error, request, response, next) => {
   // console.log("500 Internal Server Error");
+  console.log(error);
   response.status(500).send({ msg: "INTERNAL SERVER ERROR" });
 });
 ///////////////////////////////////////////
@@ -116,4 +122,9 @@ update package.json
 add test error handle to check for no comment articles
 removed status code 200 test and moved it below using .expect(200)
 
+// TASK 8:
+add tests for PATCH /api/articles/:article_id
+update app.js
+add controller & model
+update endpoints.json
 */
