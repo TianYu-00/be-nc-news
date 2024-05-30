@@ -22,7 +22,6 @@ describe("GET /api/users", () => {
       .get("/api/users")
       .expect(200)
       .then((users) => {
-        console.log(users.body);
         users.body.forEach((user) => {
           expect(user).toMatchObject({
             username: expect.any(String),
