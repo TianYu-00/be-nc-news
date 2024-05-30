@@ -3,6 +3,7 @@ const controller_topics = require("./mvc/controllers/topics.controller");
 const controller_apis = require("./mvc/controllers/api.controller");
 const controller_articles = require("./mvc/controllers/article.controller");
 const controller_comments = require("./mvc/controllers/comments.controller");
+const controller_users = require("./mvc/controllers/user.controllers");
 const app = express();
 app.use(express.json());
 ////////////////////////////////////////////
@@ -12,6 +13,7 @@ app.get("/api/topics", controller_topics.getTopics);
 app.get("/api/articles", controller_articles.getArticles);
 app.get("/api/articles/:article_id", controller_articles.getArticleById);
 app.get("/api/articles/:article_id/comments", controller_articles.getArticleComments);
+app.get("/api/users", controller_users.getUsers);
 ///////////////////////////////////////////
 
 ///////////////////////////////////////////
@@ -139,5 +141,11 @@ add tests for DELETE /api/comments/:comment_id
 update app.js
 add controller & model
 update package.json
+update endpoints.json
+
+// TASK 10:
+add tests for GET /api/users
+update app.js
+add controller & model
 update endpoints.json
 */
