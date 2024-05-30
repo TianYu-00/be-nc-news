@@ -7,7 +7,7 @@ exports.selectArticleById = (articleId) => {
 };
 
 exports.selectArticles = (query) => {
-  const acceptedQuery = ["topic"];
+  const acceptedQuery = ["topic", "author", "sort_by", "order"];
   const arrayOfKeyValue = Object.entries(query);
   if (Object.keys(query).length > 0) {
     for (const key in query) {
