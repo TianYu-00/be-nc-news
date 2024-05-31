@@ -5,7 +5,12 @@ This project involves building an API designed to provide programmatic access to
 [![madewithlove](https://img.shields.io/badge/made_with-❤-red?style=for-the-badge&labelColor=orange
 )](https://github.com/Tianyu-00)
 
+[Prerequisites](https://github.com/TianYu-00/nc-portfolio-1?tab=readme-ov-file#prerequisites) | [Setup Instruction](https://github.com/TianYu-00/nc-portfolio-1?tab=readme-ov-file#setup-instructions) | [Run Tests](https://github.com/TianYu-00/nc-portfolio-1?tab=readme-ov-file#run-tests) 
+ | [Give It A Try](https://github.com/TianYu-00/nc-portfolio-1?tab=readme-ov-file#run-tests)
+
 ![image](https://github.com/TianYu-00/nc-portfolio-1/assets/66271788/b8927b69-328b-4a44-852e-cd9cdf394a75)
+
+
 </div>
 
 ## Prerequisites
