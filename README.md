@@ -1,6 +1,14 @@
-# Northcoders News API
+<div align="center">
+<h1> Northcoders News API </h1> 
+This project involves building an API designed to provide programmatic access to application data. The goal is to simulate the development of a real-world backend service (similar to Reddit) that delivers this data to the frontend architecture. <br><br>
+  
+[![madewithlove](https://img.shields.io/badge/made_with-❤-red?style=for-the-badge&labelColor=orange
+)](https://github.com/Tianyu-00)
+
+![image](https://github.com/TianYu-00/nc-portfolio-1/assets/66271788/b8927b69-328b-4a44-852e-cd9cdf394a75)
 
 
+</div>
 
 ## Prerequisites
 - [Node.js (v21.7.2)](https://nodejs.org)
@@ -33,12 +41,9 @@ touch .env.test
 ```
 
 #### 4 ) Add your environment variables to your .env files
-
-In `.env.development` \
-`PGDATABASE = development_database_name_here`
-
-In `.env.test` \
-`PGDATABASE = test_database_name_here`
+| .env.development |.env.test | 
+| --- | --- |
+| PGDATABASE = development_database_name_here | PGDATABASE = test_database_name_here |
 
 Or add them through the terminal:
 ``` bash 
@@ -62,22 +67,24 @@ npm run seed
 > [!NOTE]
 This runs the script defined in `package.json` as `"seed": "node ./db/seeds/run-seed.js"`.
 
-## Running tests
+## Run Tests
 To run tests, use:
 ``` bash
 npm test test_file_name
-# "test": "jest"
 ```
 > [!NOTE]
 This runs the script defined in `package.json` as `"test": "jest --runInBand"`.
 
-## Try it out 
+## Give it a try
+
+#### To check for a list of access endpoints
+https://nc-portfolio-1.onrender.com/api
+> [!NOTE]
+This project uses the free plan, which may spin down with inactivity, so it could take some time to start up (50+ seconds).
+
+##
 | Database is hosted on             | Project is deployed on        |
 |-----------------------------------|-------------------------------|
 | [Supabase](https://supabase.com/) | [Render](https://render.com/) |
 
-#### To check for a list of access endpoints
-https://nc-portfolio-1.onrender.com/api
 
-> [!NOTE]
-This project uses the free plan, which may spin down with inactivity, so it could take some time to load up.
