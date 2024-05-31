@@ -6,8 +6,6 @@ This project involves building an API designed to provide programmatic access to
 )](https://github.com/Tianyu-00)
 
 ![image](https://github.com/TianYu-00/nc-portfolio-1/assets/66271788/b8927b69-328b-4a44-852e-cd9cdf394a75)
-
-
 </div>
 
 ## Prerequisites
@@ -16,64 +14,46 @@ This project involves building an API designed to provide programmatic access to
 
 ## Setup instructions
 
-#### 1 ) Clone the repository
+#### 1. Clone the repository
 ``` bash 
 git clone https://github.com/TianYu-00/nc-portfolio-1.git
 cd nc-portfolio-1
 ```
 
-#### 2 ) Install dependencies
+#### 2. Install dependencies
 ``` bash 
 npm install
 ```
 > [!NOTE]
 Check the `package.json` file to see the list of dependencies being used, and install any missing ones accordingly.
 
-#### 3 ) Create your .env files in root directory
+#### 3. Create your .env files in root directory and add your environment variables to your .env files
 
-- create a `.env.development` file
-- create a `.env.test` file
-
-Or create them through the terminal:
-``` bash
-touch .env.development
-touch .env.test
-```
-
-#### 4 ) Add your environment variables to your .env files
 | .env.development |.env.test | 
 | --- | --- |
 | PGDATABASE = development_database_name_here | PGDATABASE = test_database_name_here |
 
-Or add them through the terminal:
+Or create and add them through the terminal:
 ``` bash 
 echo "PGDATABASE = development_database_name_here" > .env.development
 echo "PGDATABASE = test_database_name_here" > .env.test
 ```
 
-#### 5 ) Setup your database in the terminal
-
+#### 4. Setup your database in the terminal
 ``` bash
 npm run setup-dbs
 ```
-> [!NOTE]
-This runs the script defined in `package.json` as `"setup-dbs": "psql -f ./db/setup.sql"`.
 
-#### 6 ) Seed your database in terminal
-
+#### 5. Seed your database in terminal
 ``` bash
 npm run seed
 ```
-> [!NOTE]
-This runs the script defined in `package.json` as `"seed": "node ./db/seeds/run-seed.js"`.
 
 ## Run Tests
 To run tests, use:
 ``` bash
 npm test test_file_name
 ```
-> [!NOTE]
-This runs the script defined in `package.json` as `"test": "jest --runInBand"`.
 
 ## Give it a try
 
@@ -82,7 +62,7 @@ https://nc-portfolio-1.onrender.com/api
 > [!NOTE]
 This project uses the free plan, which may spin down with inactivity, so it could take some time to start up (50+ seconds).
 
-##
+#### Hosting Information
 | Database is hosted on             | Project is deployed on        |
 |-----------------------------------|-------------------------------|
 | [Supabase](https://supabase.com/) | [Render](https://render.com/) |
