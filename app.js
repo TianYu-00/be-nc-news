@@ -164,4 +164,10 @@ update endpoints.json
 update connection.js
 update listen.js
 update package.json
+
+// TASK 15:
+add tests for GET /api/articles (sorting queries)
+update app.js
+update model
+
 */
