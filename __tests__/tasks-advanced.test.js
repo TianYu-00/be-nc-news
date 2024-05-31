@@ -144,3 +144,28 @@ describe("ADVANCED: GET /api/articles (sorting queries)", () => {
     });
   });
 });
+
+describe("ADVANCED: GET /api/users/:username", () => {
+  test("should return a user by username", () => {
+    return request(app)
+      .get("/api/users/lurker")
+      .expect(200)
+      .then(({ body }) => {
+        body.created_at = new Date(body.created_at);
+        expect(body).toMatchObject({
+          username: expect.any(String),
+          name: expect.any(String),
+          avatar_url: expect.any(String),
+        });
+      });
+  });
+
+  test("should receive a NOT FOUND error message if username given was not in the database", () => {
+    return request(app)
+      .get("/api/users/Tian")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("NOT FOUND");
+      });
+  });
+});
