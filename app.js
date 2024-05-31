@@ -1,35 +1,9 @@
 const express = require("express"); // https://www.npmjs.com/package/express
-const controller_topics = require("./mvc/controllers/topics.controller");
-const controller_apis = require("./mvc/controllers/api.controller");
-const controller_articles = require("./mvc/controllers/article.controller");
-const controller_comments = require("./mvc/controllers/comments.controller");
-const controller_users = require("./mvc/controllers/user.controllers");
+const apiRouter = require("./routes/api-router");
 const app = express();
 app.use(express.json());
-////////////////////////////////////////////
-// GET
-app.get("/api", controller_apis.getApis);
-app.get("/api/topics", controller_topics.getTopics);
-app.get("/api/articles", controller_articles.getArticles);
-app.get("/api/articles/:article_id", controller_articles.getArticleById);
-app.get("/api/articles/:article_id/comments", controller_articles.getArticleComments);
-app.get("/api/users", controller_users.getUsers);
-///////////////////////////////////////////
 
-///////////////////////////////////////////
-// POST
-app.post("/api/articles/:article_id/comments", controller_articles.postArticleComment);
-///////////////////////////////////////////
-
-///////////////////////////////////////////
-// PATCH
-app.patch("/api/articles/:article_id", controller_articles.patchArticleById);
-///////////////////////////////////////////
-
-///////////////////////////////////////////
-// DELETE
-app.delete("/api/comments/:comment_id", controller_comments.deleteCommentById);
-///////////////////////////////////////////
+app.use("/api", apiRouter);
 
 ////////////////////////////////////////////
 // ERROR HANDLING
