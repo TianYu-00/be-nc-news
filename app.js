@@ -140,8 +140,18 @@ update listen.js
 update package.json
 
 // TASK 15:
-add tests for GET /api/articles (sorting queries)
+add tests for ADVANCED GET /api/articles (sorting queries)
 update app.js
 update model
 
+// TASK 16:
+update app.js
+add route folder
+add router files
+
+// TASK 17:
+add tests for ADVANCED GET /api/users/:username
+update app.js
+update controller and model
+update endpoints.json
 */
