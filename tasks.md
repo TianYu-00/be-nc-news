@@ -25,8 +25,8 @@
 `GET /api/users` ✅
 - responds with a list of users
 
-`GET /api/articles (queries)`
+`GET /api/articles (queries)` ✅
 - allows articles to be filtered and sorted
 
-`GET /api/articles/:article_id (comment count)`
+`GET /api/articles/:article_id (comment count)` ✅
 - adds a comment count to the response when retrieving a single article
