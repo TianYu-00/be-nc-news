@@ -169,3 +169,63 @@ describe("ADVANCED: GET /api/users/:username", () => {
       });
   });
 });
+
+describe("ADVANCED: PATCH /api/comments/:comment_id", () => {
+  test("should update the votes on a comment given the comment's comment_id", () => {
+    return request(app)
+      .patch("/api/comments/1")
+      .send({ inc_votes: 100 })
+      .expect(200)
+      .then((result) => {
+        expect(result.body.votes).toBe(116);
+      });
+  });
+
+  test("should decrement the vote count of the specified article", () => {
+    return request(app)
+      .patch("/api/comments/1")
+      .send({ inc_votes: -5 })
+      .expect(200)
+      .then((result) => {
+        expect(result.body.votes).toBe(11);
+      });
+  });
+
+  test("should return the comment object", () => {
+    return request(app)
+      .patch("/api/comments/1")
+      .send({ inc_votes: 0 })
+      .expect(200)
+      .then(({ body }) => {
+        body.created_at = new Date(body.created_at);
+        expect(body).toMatchObject({
+          comment_id: expect.any(Number),
+          body: expect.any(String),
+          article_id: expect.any(Number),
+          author: expect.any(String),
+          votes: expect.any(Number),
+          created_at: expect.any(Date),
+        });
+      });
+  });
+
+  test("should send an appropriate status and error message when given a valid but non-existent id", () => {
+    return request(app)
+      .patch("/api/comments/999")
+      .send({ inc_votes: 0 })
+      .expect(404)
+      .then((response) => {
+        expect(response.body.msg).toBe("comment does not exist");
+      });
+  });
+
+  test("should send an appropriate status and error message when given an invalid id", () => {
+    return request(app)
+      .patch("/api/comments/invalid-id")
+      .send({ inc_votes: 0 })
+      .expect(400)
+      .then((response) => {
+        expect(response.body.msg).toBe("BAD REQUEST");
+      });
+  });
+});

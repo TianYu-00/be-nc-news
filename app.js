@@ -154,4 +154,11 @@ add tests for ADVANCED GET /api/users/:username
 update app.js
 update controller and model
 update endpoints.json
+
+// TASK 18:
+add tests for ADVANCED: PATCH /api/comments/:comment_id
+update app.js
+update controller and model
+update routes and router
+update endpoints.json
 */
