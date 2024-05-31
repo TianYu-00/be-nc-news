@@ -2,6 +2,9 @@
 
 There are many ways to host APIs online. In these notes we will be using [Supabase](https://supabase.com/) to create an online location for your database, and [Render](https://render.com/) to host the API. Render also offers free postgres hosting, but only for 90 days so we'll use a separate service to host our database.
 
+> [!NOTE]
+Some of these steps have already been done for you, it's just there for reference. 
+
 ## 1. Setup a database instance using Supabase
 
 - Create a [Supabase account](https://supabase.com/). You can sign up using your email address or alternatively sign in using an existing GitHub account.
