@@ -8,20 +8,20 @@
 
 ## Setup instructions
 
-### 1 ) Clone the repository
+#### 1 ) Clone the repository
 ``` bash 
 git clone https://github.com/TianYu-00/nc-portfolio-1.git
 cd nc-portfolio-1
 ```
 
-### 2 ) Install dependencies
+#### 2 ) Install dependencies
 ``` bash 
 npm install
 ```
 > [!NOTE]
 Check the `package.json` file to see the list of dependencies being used, and install any missing ones accordingly.
 
-### 3 ) Create your .env files in root directory
+#### 3 ) Create your .env files in root directory
 
 - create a `.env.development` file
 - create a `.env.test` file
@@ -32,7 +32,7 @@ touch .env.development
 touch .env.test
 ```
 
-### 4 ) Add your environment variables to your .env files
+#### 4 ) Add your environment variables to your .env files
 
 In `.env.development` \
 `PGDATABASE = development_database_name_here`
@@ -46,7 +46,7 @@ echo "PGDATABASE = development_database_name_here" > .env.development
 echo "PGDATABASE = test_database_name_here" > .env.test
 ```
 
-### 5 ) Setup your database in the terminal
+#### 5 ) Setup your database in the terminal
 
 ``` bash
 npm run setup-dbs
@@ -54,7 +54,7 @@ npm run setup-dbs
 > [!NOTE]
 This runs the script defined in `package.json` as `"setup-dbs": "psql -f ./db/setup.sql"`.
 
-### 6 ) Seed your database in terminal
+#### 6 ) Seed your database in terminal
 
 ``` bash
 npm run seed
