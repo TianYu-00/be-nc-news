@@ -29,31 +29,50 @@ exports.selectArticleById = (articleId, query) => {
   const errorMsg = "article does not exist";
   return errorHandleDBQuery(sqlQuery, [articleId], errorMsg).then((rows) => rows[0]);
 };
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 exports.selectArticles = (query) => {
   const acceptedQuery = ["topic", "author", "sort_by", "order"];
+  const allowSortBy = ["", "created_at", "title", "votes", "author"];
+  const allowOrder = ["ASC", "DESC"];
+
   const arrayOfKeyValue = Object.entries(query);
-  if (Object.keys(query).length > 0) {
-    for (const key in query) {
-      if (!acceptedQuery.includes(key)) {
-        return Promise.reject({ status: 400, msg: "BAD REQUEST" });
-      }
-    }
+  if (Object.keys(query).some((key) => !acceptedQuery.includes(key))) {
+    return Promise.reject({ status: 400, msg: "BAD REQUEST" });
   }
 
   let sqlQuery = `SELECT articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url, COUNT(comments.article_id) AS comment_count
-  FROM articles 
-  LEFT JOIN comments ON comments.article_id = articles.article_id `;
+    FROM articles 
+    LEFT JOIN comments ON comments.article_id = articles.article_id 
+  `;
 
   const queryValueArray = [];
-  arrayOfKeyValue.forEach((currentQuery) => {
-    if (currentQuery[0] === "topic") {
-      sqlQuery += `WHERE topic = $1 `;
-      queryValueArray.push(currentQuery[1]);
-    }
-  });
+  const whereClauses = arrayOfKeyValue
+    .filter(([key]) => key === "topic" || key === "author")
+    .map(([key, value]) => {
+      queryValueArray.push(value);
+      return key === "topic" ? `topic = $${queryValueArray.length}` : `articles.author = $${queryValueArray.length}`;
+    });
 
-  sqlQuery += `GROUP BY articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url ORDER BY articles.created_at DESC `;
+  if (whereClauses.length > 0) {
+    sqlQuery += `WHERE ${whereClauses.join(" AND ")} `;
+  }
+
+  sqlQuery += `GROUP BY articles.author, articles.title, articles.article_id, articles.topic, articles.created_at, articles.votes, articles.article_img_url `;
+
+  const { sort_by, order } = query;
+  const normalizedSortByQueryValue = sort_by ? sort_by.trim() : null;
+  const normalizedOrderQueryValue = order ? order.trim().toUpperCase() : null;
+
+  if (normalizedSortByQueryValue && !allowSortBy.includes(normalizedSortByQueryValue)) {
+    return Promise.reject({ status: 400, msg: "BAD REQUEST" });
+  }
+
+  if (normalizedOrderQueryValue && !allowOrder.includes(normalizedOrderQueryValue)) {
+    return Promise.reject({ status: 400, msg: "BAD REQUEST" });
+  }
+
+  sqlQuery += `ORDER BY ${normalizedSortByQueryValue || "created_at"} ${normalizedOrderQueryValue || "DESC"};`;
+
   sqlQuery += ";";
 
   const errorMsg = "NOT FOUND";
