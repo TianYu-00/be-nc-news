@@ -62,9 +62,11 @@ https://nc-portfolio-1.onrender.com/api
 > [!NOTE]
 This project uses the free plan, which may spin down with inactivity, so it could take some time to start up (50+ seconds).
 
+Check out [this](https://github.com/TianYu-00/nc-portfolio-1/blob/1944059adbe0d6875ef84a51243b4ca598029f46/hosting.md) markdown if you are interested in hosting your own database and api. Credit goes to Northcoders Team for this!
+
 #### Hosting Information
-| Database is hosted on             | Project is deployed on        |
-|-----------------------------------|-------------------------------|
-| [Supabase](https://supabase.com/) | [Render](https://render.com/) |
+| Database is hosted on             | API is hosted and deployed on        |
+|-----------------------------------|--------------------------------------|
+| [Supabase](https://supabase.com/) | [Render](https://render.com/)        |
 
 
