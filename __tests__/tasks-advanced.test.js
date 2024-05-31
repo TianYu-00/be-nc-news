@@ -197,7 +197,6 @@ describe.only("ADVANCED: PATCH /api/comments/:comment_id", () => {
       .send({ inc_votes: 0 })
       .expect(200)
       .then(({ body }) => {
-        console.log(body);
         body.created_at = new Date(body.created_at);
         expect(body).toMatchObject({
           comment_id: expect.any(Number),
