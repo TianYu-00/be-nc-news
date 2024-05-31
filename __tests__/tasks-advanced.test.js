@@ -170,7 +170,7 @@ describe("ADVANCED: GET /api/users/:username", () => {
   });
 });
 
-describe.only("ADVANCED: PATCH /api/comments/:comment_id", () => {
+describe("ADVANCED: PATCH /api/comments/:comment_id", () => {
   test("should update the votes on a comment given the comment's comment_id", () => {
     return request(app)
       .patch("/api/comments/1")
