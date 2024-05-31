@@ -1,8 +1,10 @@
 # Northcoders News API
 
+
+
 ## Prerequisites
-- Node.js 
-- PostgreSQL 
+- Node.js (v21.7.2 <--- Version used when creating the project)
+- PostgreSQL (v14.11 <--- Version used when creating the project)
 
 ## Setup instructions
 
@@ -16,6 +18,8 @@ cd nc-portfolio-1
 ``` bash 
 npm install
 ```
+> [!NOTE]
+Please check `package.json` file to see the list of dependencies being used, and install it accordingly if any is missing.
 
 ### 3 ) create your .env files in root directory
 
@@ -63,6 +67,15 @@ npm test test_file_name
 # "test": "jest"
 ```
 
----
+## Try it out 
+
+#### Database is hosted on
+https://supabase.com/
+#### Project is deployed on 
+https://render.com/
+
+#### To check for a list of access endpoints
+https://nc-portfolio-1.onrender.com/api
+
 > [!NOTE]
-Please check `package.json` file to see the list of dependencies being used, and install it accordingly if any is missing.
+This project is using the free plan which would spin down with inactivity, so it could take some time to load up.
