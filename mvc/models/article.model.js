@@ -32,7 +32,7 @@ exports.selectArticleById = (articleId, query) => {
 
 exports.selectArticles = (query) => {
   const acceptedQuery = ["topic", "author", "sort_by", "order"];
-  const allowSortBy = ["", "created_at", "title", "votes", "author"];
+  const allowSortBy = ["", "created_at", "title", "votes", "author", "comment_count"];
   const allowOrder = ["ASC", "DESC"];
 
   const arrayOfKeyValue = Object.entries(query);

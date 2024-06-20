@@ -229,3 +229,36 @@ describe("ADVANCED: PATCH /api/comments/:comment_id", () => {
       });
   });
 });
+
+describe("Separate Test", () => {
+  test("should respond back with sorted articles based on comment count when queried with sort_by=comment_count, defaults to descending when not passed an order query", () => {
+    return request(app)
+      .get("/api/articles?sort_by=comment_count")
+      .expect(200)
+      .then(({ body }) => {
+        // Convert comment_count values to numbers for numeric comparison
+        const sortedByCommentCount = body.map((article) => parseInt(article.comment_count, 10));
+        expect(sortedByCommentCount).toBeSorted({ descending: true });
+      });
+  });
+  test("should respond back with sorted articles based on comment count when queried with sort_by=comment_count, ASC", () => {
+    return request(app)
+      .get("/api/articles?sort_by=comment_count&order=ASC")
+      .expect(200)
+      .then(({ body }) => {
+        // Convert comment_count values to numbers for numeric comparison
+        const sortedByCommentCount = body.map((article) => parseInt(article.comment_count, 10));
+        expect(sortedByCommentCount).toBeSorted({ descending: false });
+      });
+  });
+  test("should respond back with sorted articles based on comment count when queried with sort_by=comment_count, DESC", () => {
+    return request(app)
+      .get("/api/articles?sort_by=comment_count&order=DESC")
+      .expect(200)
+      .then(({ body }) => {
+        // Convert comment_count values to numbers for numeric comparison
+        const sortedByCommentCount = body.map((article) => parseInt(article.comment_count, 10));
+        expect(sortedByCommentCount).toBeSorted({ descending: true });
+      });
+  });
+});
