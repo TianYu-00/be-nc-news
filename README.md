@@ -21,7 +21,7 @@ This project involves building an API designed to provide programmatic access to
 
 #### 1. Clone the repository
 ``` bash 
-git clone https://github.com/TianYu-00/nc-portfolio-1.git
+git clone https://github.com/TianYu-00/be-nc-news.git
 cd nc-portfolio-1
 ```
 
