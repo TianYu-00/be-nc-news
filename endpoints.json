@@ -14,6 +14,9 @@
       }
     }
   },
+  "GET /api/health-check": {
+    "description": "check if the database is connected and the server is running"
+  },
   "GET /api/topics": {
     "description": "responds with a list of topics",
     "queries": [],
